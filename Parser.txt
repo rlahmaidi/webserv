@@ -1,0 +1,140 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <sstream> //https://stackoverflow.com/questions/13428164/c-compile-error-has-initializer-but-incomplete-type
+
+class http_server {
+	private:
+		// vector of servers
+};
+
+void parsing(std::ifstream& config_file) {
+
+/*
+	void parsing(std::string str) {
+	std::string::iterator it;
+
+	
+	std::size_t pos;
+	for(it = str.begin(); it < str.end(); it++)
+	{
+		if (pos = (str+it).find("server", it, 6));
+		{
+			std::cout << str.substr(pos, pos+6) << std::endl;
+			it += 6;
+		}
+	}
+*/
+	std::string str;
+	//https://www.geeksforgeeks.org/tokenizing-a-string-cpp/?ref=lbp
+	while (getline(config_file, str))
+	{
+		/*
+		 //skip_whitespaces(str);
+		// use iterators in string
+		std::size_t pos;
+		pos = str.find("server"); 
+		//https://www.geeksforgeeks.org/string-find-in-cpp/
+		if ( pos != std::string::npos)
+			std::cout << str.substr(pos, pos+7) << std::endl;
+		//else
+		//	std::cout << str << std::endl;
+		*/
+
+/*		std::vector<std::string>& strtock_one_del(std::string& str, char c)
+		{
+			std::stringstream check_serverblock(str);
+
+			std::string intermediate;
+			std::vector<std::string> tokens;
+			while (getline(check_serverblock, intermediate, c))
+			{
+				tokens.push_back(intermediate);
+			}
+		}
+		std::vector<std::string>& strtock_multi_del(std::string& str, std::string& del)
+		{
+			std::stringstream check_serverblock(str);
+
+			std::string intermediate;
+			std::vector<std::string> tokens;
+			while (getline(check_serverblock, intermediate, del[1]))
+			{
+				tokens.push_back(intermediate);
+			}
+		}
+*/
+		if (str.substr(0, 6) == "server")
+		{
+			//strtock()
+		}
+		else
+		{
+			std::stringstream check_serverblock(str);
+			std::string intermediate;
+
+			std::vector<std::string> tokens;
+
+			// Tokenizing with space
+			while (getline(check_serverblock, intermediate, ' '))
+			{
+				tokens.push_back(intermediate);
+			}
+
+			// Printing the token vector
+			for (int i = 0; i < tokens.size(); i++)
+				std::cout << tokens[i] << std::endl;
+		}
+	}
+}
+
+int parser(std::string arg, http_server& web_server)
+{
+
+// This method using push_back : reference/string/string/push_back
+/*	std::string str;
+
+	std::ifstream file;
+	
+	file.open(arg, std::ios::in);
+	if (file.is_open())
+	{
+		while (!file.eof())
+			str.push_back(file.get());
+		parsing(str);
+	}
+	else
+	{
+		std::cout << "Error opening file";
+		throw 501;
+	}
+	return (0);
+*/
+	std::ifstream config_file;
+
+	config_file.open(arg, std::ifstream::in);
+
+	if (config_file.is_open())
+	{
+		// use seekg() to go til the end of the file
+		config_file.seekg(0, std::ifstream::end);
+		if (config_file.tellg() == EOF)
+			std::cout << "ERROR empty file: " << arg << std::endl;
+		else
+		{
+			// use seekg() to comeback to the beg of the file
+			config_file.seekg(0, std::ifstream::beg);
+
+			std::cout << "Now you need to parse it to tokens" << std::endl;
+			parsing(config_file); //https://stackoverflow.com/questions/27501160/pass-a-reference-to-stdifstream-as-parameter
+		}
+		config_file.close();
+	}
+	else
+	{
+		std::cout << "ERROR opening file: " << arg << std::endl;
+		throw 501;
+	}
+	return (0);
+}

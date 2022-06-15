@@ -1,0 +1,84 @@
+	 				0- empty(): it returns whether the container is empty or not.
+/*
+	if (num.empty() == false)
+		std::cout << "Vector is not empty";
+	else
+		std::cout << "Vector is empty";
+ */
+
+					1- Fill vector
+/*
+	int main()
+	{
+		std::vector<int> num; // Declaration of Vector in c++
+
+		// Initializing vector with values from 1 to 7;
+		for (int i = 1; i <= 7; i++)
+			num.push_back(i);
+	}
+*/
+
+					2- Delete Elements from C++ Vectors
+/*
+  std::vector<int> num;
+
+
+  // declare iterator to iterate through Vector using iterators
+  std::vector<int>::iterator iter;
+
+  //use iterator with for loop
+  for (iter = num.begin(); iter != num.end(); ++iter)
+  {
+  		std::cout << *iter << " ";
+  }
+  return 0;
+*/
+
+					3- Access Elements of a Vector
+/*
+//	==> In C++, we use the index number to access the vector elements.
+//	==> Here, we use the "at()" function to access the element from the special index.
+
+	int main() {
+		std::vector<int> num;
+
+		std::cout << num.at(2) << std::endl;
+		std::cout << num.at(0) << std::endl;
+		return (0);
+	}
+	
+ */
+
+					4- Change Vector Element
+/*
+	int main() {
+		std::vector<int> num{1, 2, 3, 4,  5};
+
+		std::vector::iterator iter;
+		for (iter = num.begin(); iter != num.end(); ++iter)
+			std::cout << *iter << " ";
+
+		std::cout << std::endl;
+
+		// change elements at indexes 1 and 4
+		
+		num.at(1) = 0;
+		num.at(4) = 7;
+
+		for (iter = num.begin(); iter != num.end(); ++iter)
+			std::cout << *iter << " ";
+
+		std::cout << std::endl;
+	}
+ */
+
+
+				 5- erase() : remove elements from a specified element or a range in the vector
+/*
+		// removing the first element
+		num.erase(num.begin());
+ */
+
+// https://www.freecodecamp.org/news/cpp-vector-how-to-initialize-a-vector-in-a-constructor/
+
+// erase :   https://www.bitdegree.org/learn/c-plus-plus-vector
